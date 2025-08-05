@@ -1,0 +1,60 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../app/generated/prisma"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String   @id @default(uuid())
+  name      String
+  email     String   @unique
+  password  String
+  role      Role
+  lessons   Lesson[]
+  sales     Sale[]   @relation("BuyerSales")
+  createdAt DateTime @default(now())
+}
+
+enum Role {
+  TEACHER
+  BUYER
+  ADMIN
+}
+
+model Lesson {
+  id          String       @id @default(uuid())
+  title       String
+  subject     String
+  grade       Int
+  description String
+  fileUrl     String
+  price       Float
+  status      LessonStatus @default(PENDING)
+  teacher     User         @relation(fields: [teacherId], references: [id])
+  teacherId   String
+  sales       Sale[]
+  createdAt   DateTime     @default(now())
+}
+
+enum LessonStatus {
+  PENDING
+  APPROVED
+  REJECTED
+}
+
+model Sale {
+  id        String   @id @default(uuid())
+  lesson    Lesson   @relation(fields: [lessonId], references: [id])
+  lessonId  String
+  buyer     User     @relation("BuyerSales", fields: [buyerId], references: [id])
+  buyerId   String
+  amount    Float
+  createdAt DateTime @default(now())
+}
