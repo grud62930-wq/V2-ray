@@ -13,8 +13,11 @@ export default function HomePage() {
         <Button href="/register" variant="contained" size="large" sx={{ backgroundColor: 'var(--primary)', color: '#fff', fontWeight: 600, fontFamily: 'Poppins', mr: 2 }}>
           Join as Teacher
         </Button>
-        <Button href="/login" variant="outlined" size="large" sx={{ borderColor: 'var(--accent)', color: 'var(--accent)', fontWeight: 600, fontFamily: 'Poppins' }}>
-          Browse as Buyer
+        <Button href="/marketplace" variant="outlined" size="large" sx={{ borderColor: 'var(--accent)', color: 'var(--accent)', fontWeight: 600, fontFamily: 'Poppins', mr: 2 }}>
+          Browse Marketplace
+        </Button>
+        <Button href="/login" variant="outlined" size="large" sx={{ borderColor: 'var(--primary)', color: 'var(--primary)', fontWeight: 600, fontFamily: 'Poppins' }}>
+          Login
         </Button>
       </Box>
     </Container>
